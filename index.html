@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidz World - Clothes, Toys & Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .brand-logo {
+            font-family: 'Pacifico', cursive;
+        }
+        .hero-pattern {
+            background-color: #fef3c7; /* amber-100 */
+            background-image:
+                radial-gradient(circle at 1px 1px, #fde68a /* amber-200 */ 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        /* Custom scrollbar for cart */
+        .cart-items::-webkit-scrollbar {
+            width: 8px;
+        }
+        .cart-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .cart-items::-webkit-scrollbar-thumb {
+            background: #d1d5db; /* gray-400 */
+            border-radius: 10px;
+        }
+        .cart-items::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af; /* gray-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#home" class="brand-logo text-3xl font-bold text-amber-500">
+                    Kidz World
+                </a>
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-600 hover:text-sky-500 transition duration-300">Home</a>
+                    <a href="#products" class="text-gray-600 hover:text-sky-500 transition duration-300">Products</a>
+                    <a href="#about" class="text-gray-600 hover:text-sky-500 transition duration-300">About</a>
+                    <a href="#contact" class="text-gray-600 hover:text-sky-500 transition duration-300">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <div id="auth-container" class="hidden md:flex items-center space-x-2">
+                        <button id="login-btn" class="text-gray-600 hover:text-sky-500 transition duration-300 px-3 py-1">Login</button>
+                        <button id="register-btn" class="bg-sky-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-sky-600 transition">Register</button>
+                    </div>
+                    <div id="account-container" class="hidden items-center space-x-4">
+                        <span id="user-email-display" class="text-sm text-gray-700 hidden md:block"></span>
+                        <button id="logout-btn" class="text-red-500 hover:underline text-sm font-semibold">Logout</button>
+                    </div>
+                    <button id="cart-button" class="relative p-2 rounded-full text-gray-600 hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#home" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Home</a>
+                <a href="#products" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Products</a>
+                <a href="#about" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">About</a>
+                <a href="#contact" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Contact</a>
+                 <div id="mobile-auth-container" class="border-t mt-2 pt-2">
+                    <!-- Mobile auth buttons will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-pattern">
+            <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                    Spark Joy & Learning
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    Discover our collection of fun toys, comfy clothes, and engaging educational tools sourced globally from top-quality makers.
+                </p>
+                <a href="#products" class="bg-sky-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-sky-600 transition duration-300 shadow-lg transform hover:scale-105">
+                    Shop All Products
+                </a>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Our Collection</h2>
+                 <div class="flex justify-center space-x-4 mb-12">
+                    <button class="product-filter-btn active bg-sky-500 text-white px-4 py-2 rounded-lg" data-filter="all">All</button>
+                    <button class="product-filter-btn bg-white text-gray-600 px-4 py-2 rounded-lg" data-filter="clothes">Clothes</button>
+                    <button class="product-filter-btn bg-white text-gray-600 px-4 py-2 rounded-lg" data-filter="toys">Toys</button>
+                    <button class="product-filter-btn bg-white text-gray-600 px-4 py-2 rounded-lg" data-filter="education">Education</button>
+                </div>
+                <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Product items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://imgur.com/YtTRC7t.jpeg" alt="Happy kids playing" class="rounded-lg shadow-xl">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Kidz World!</h2>
+                        <p class="text-gray-600 mb-4">
+                            We believe that childhood should be filled with wonder. That's why we travel the world to find the best clothes, toys, and educational materials.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            Our products are carefully selected from trusted suppliers in China and beyond, ensuring they are safe, durable, and inspiring for your little ones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Have Questions?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                    We'd love to hear from you! Reach out to our friendly team for any inquiries about our products or your order.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="mailto:reunreun168@gmail.com" class="flex items-center text-lg text-gray-600 hover:text-sky-500 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        reunreun@168gmail.com
+                    </a>
+                    <a href="tel:+1234567890" class="flex items-center text-lg text-gray-600 hover:text-sky-500 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        (123) 456-7890
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="brand-logo text-3xl font-bold text-amber-500 mb-2">Kidz World</p>
+            <p class="text-gray-400 text-sm">&copy; 2025 Kidz World. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Notification/Toast -->
+    <div id="notification" class="hidden fixed top-5 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg z-[60] transform translate-x-full transition-transform duration-300">
+        <p id="notification-message"></p>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-sm w-full p-8 relative">
+            <button id="close-login-modal-btn" class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 class="text-2xl font-bold mb-6 text-center">Login</h3>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="login-email" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="login-password" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <button type="submit" class="w-full bg-sky-500 text-white font-semibold py-2 rounded-lg hover:bg-sky-600 transition">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div id="register-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-sm w-full p-8 relative">
+            <button id="close-register-modal-btn" class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 class="text-2xl font-bold mb-6 text-center">Create Account</h3>
+            <form id="register-form">
+                <div class="mb-4">
+                    <label for="register-email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="register-email" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="register-password" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <button type="submit" class="w-full bg-sky-500 text-white font-semibold py-2 rounded-lg hover:bg-sky-600 transition">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
+        <div class="bg-white w-full max-w-md h-full flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Your Cart</h3>
+                <button id="close-cart-btn" class="p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="cart-items-container" class="cart-items flex-grow p-6 overflow-y-auto">
+                <!-- Cart items will be injected here -->
+            </div>
+            <div class="p-6 border-t">
+                <div class="flex justify-between items-center font-bold text-lg mb-4">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-sky-500 text-white font-semibold py-3 rounded-lg hover:bg-sky-600 transition disabled:bg-gray-300">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product Detail Modal -->
+    <div id="product-detail-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div id="product-detail-content" class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto relative p-6 md:p-8">
+            <!-- Product details injected here -->
+        </div>
+    </div>
+    
+    <!-- Checkout Form Modal -->
+    <div id="checkout-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto relative">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Checkout</h3>
+                <button id="close-checkout-form-btn" class="p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <form id="payment-form" class="p-6">
+                <h4 class="text-lg font-semibold mb-4 text-gray-800">Shipping Information</h4>
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" id="address" name="address" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+
+                <h4 class="text-lg font-semibold mb-4 text-gray-800 border-t pt-6">Payment Details</h4>
+                 <div class="mb-4">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700">Card Number</label>
+                    <input type="text" id="card-number" placeholder="•••• •••• •••• ••••" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="expiry-date" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                    </div>
+                    <div>
+                        <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                        <input type="text" id="cvc" placeholder="•••" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-500 focus:border-sky-500" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-green-500 text-white font-semibold py-3 rounded-lg hover:bg-green-600 transition">
+                    Pay Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmation-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-sm w-full p-8 text-center">
+             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Thank You!</h3>
+            <p class="text-gray-600 mb-6">Your order has been placed successfully. We'll send you a confirmation email shortly.</p>
+            <button id="close-confirmation-btn" class="w-full bg-sky-500 text-white font-semibold py-2 rounded-lg hover:bg-sky-600">Close</button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA ---
+        // Here we replace the placeholder URLs with direct links to your uploaded images.
+        // In a real application, you would upload these to a hosting service.
+        // For this example, I'm using placeholder links that represent your uploaded files.
+        const products = [
+            { id: 1, name: 'Dinosaur Graphic T-Shirt', price: 15.99, image: 'https://i.imgur.com/AHiLk41.jpeg', category: 'clothes', description: 'A comfy 100% cotton t-shirt with a cool dinosaur graphic. Perfect for everyday adventures.' },
+            { id: 2, name: 'Wooden Building Blocks', price: 29.99, image: 'https://imgur.com/2Vgl286.jpeg', category: 'toys', description: 'A 50-piece set of high-quality wooden blocks in various shapes and colors to spark creativity.' },
+            { id: 3, name: 'Interactive Learning Tablet', price: 45.50, image: 'https://imgur.com/iV8vbiF.jpeg', category: 'education', description: 'An educational tablet with fun games for learning letters, numbers, and animals.' },
+            { id: 4, name: 'Cozy Denim Jeans', price: 24.99, image: 'https://imgur.com/h0P1yio.jpeg', category: 'clothes', description: 'Durable and stylish denim jeans with a comfortable elastic waistband.' },
+            { id: 5, name: 'Plush Teddy Bear', price: 19.99, image: 'https://imgur.com/kUGl2Y4.jpeg', category: 'toys', description: 'A super soft and cuddly teddy bear, the perfect companion for your little one.' },
+            { id: 6, name: 'Science Explorer Kit', price: 34.99, image: 'https://imgur.com/n1fRG87.jpeg', category: 'education', description: 'A beginner science kit with 10+ safe and exciting experiments for curious minds.' },
+            { id: 7, name: 'Striped Summer Dress', price: 22.00, image: 'https://imgur.com/zH8yFcD.jpeg', category: 'clothes', description: 'A light and breezy cotton dress, perfect for sunny days and parties.' },
+            { id: 8, name: 'Remote Control Car', price: 39.99, image: 'https://imgur.com/tsl0DwY.jpeg', category: 'toys', description: 'A fast and responsive remote control car that can handle indoor and outdoor terrains.' }
+        ];
+        let cart = [];
+        let users = []; // User database simulation
+        let currentUser = null; // Track logged-in user
+
+        // --- DOM ELEMENTS ---
+        const productGrid = document.getElementById('product-grid');
+        const cartCount = document.getElementById('cart-count');
+        const cartButton = document.getElementById('cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCartBtn = document.getElementById('close-cart-btn');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const productDetailContent = document.getElementById('product-detail-content');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const closeConfirmationBtn = document.getElementById('close-confirmation-btn');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const filterBtns = document.querySelectorAll('.product-filter-btn');
+        const checkoutFormModal = document.getElementById('checkout-form-modal');
+        const closeCheckoutFormBtn = document.getElementById('close-checkout-form-btn');
+        const paymentForm = document.getElementById('payment-form');
+        // Auth DOM Elements
+        const authContainer = document.getElementById('auth-container');
+        const mobileAuthContainer = document.getElementById('mobile-auth-container');
+        const accountContainer = document.getElementById('account-container');
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const loginModal = document.getElementById('login-modal');
+        const registerModal = document.getElementById('register-modal');
+        const closeLoginModalBtn = document.getElementById('close-login-modal-btn');
+        const closeRegisterModalBtn = document.getElementById('close-register-modal-btn');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        // --- FUNCTIONS ---
+
+        function showNotification(message, isError = true) {
+            notificationMessage.textContent = message;
+            notification.classList.remove('hidden', 'bg-red-500', 'bg-green-500', 'translate-x-full');
+            notification.classList.add(isError ? 'bg-red-500' : 'bg-green-500');
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 10);
+
+            // Animate out after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.classList.add('hidden'), 300);
+            }, 3000);
+        }
+
+        function updateAuthStateUI() {
+            if (currentUser) {
+                authContainer.classList.add('hidden');
+                accountContainer.classList.remove('hidden');
+                userEmailDisplay.textContent = currentUser;
+
+                // Mobile menu auth state
+                mobileAuthContainer.innerHTML = `
+                    <div class="px-4 py-2 text-sm text-gray-700">${currentUser}</div>
+                    <button id="mobile-logout-btn" class="block w-full text-left py-2 px-4 text-sm text-red-500 hover:bg-gray-100 rounded-md">Logout</button>
+                `;
+                document.getElementById('mobile-logout-btn').addEventListener('click', handleLogout);
+            } else {
+                authContainer.classList.remove('hidden');
+                accountContainer.classList.add('hidden');
+                
+                 // Mobile menu auth state
+                mobileAuthContainer.innerHTML = `
+                    <button id="mobile-login-btn" class="block w-full text-left py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Login</button>
+                    <button id="mobile-register-btn" class="block w-full text-left py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Register</button>
+                `;
+                document.getElementById('mobile-login-btn').addEventListener('click', () => loginModal.classList.remove('hidden'));
+                document.getElementById('mobile-register-btn').addEventListener('click', () => registerModal.classList.remove('hidden'));
+            }
+        }
+        
+        function handleRegister(e) {
+            e.preventDefault();
+            const email = registerForm.querySelector('#register-email').value;
+            const password = registerForm.querySelector('#register-password').value;
+            const confirmPassword = registerForm.querySelector('#confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showNotification("Passwords do not match.");
+                return;
+            }
+            if (users.find(user => user.email === email)) {
+                showNotification("User with this email already exists.");
+                return;
+            }
+
+            users.push({ email, password });
+            currentUser = email;
+            updateAuthStateUI();
+            registerModal.classList.add('hidden');
+            registerForm.reset();
+            showNotification("Account created successfully!", false);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = loginForm.querySelector('#login-email').value;
+            const password = loginForm.querySelector('#login-password').value;
+
+            const user = users.find(user => user.email === email);
+
+            if (user && user.password === password) {
+                currentUser = email;
+                updateAuthStateUI();
+                loginModal.classList.add('hidden');
+                loginForm.reset();
+                showNotification("Logged in successfully!", false);
+            } else {
+                showNotification("Invalid email or password.");
+            }
+        }
+        
+        function handleLogout() {
+            currentUser = null;
+            updateAuthStateUI();
+            showNotification("You have been logged out.", false);
+        }
+
+        function renderProducts(filter = 'all') {
+            productGrid.innerHTML = '';
+            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            if(filteredProducts.length === 0) {
+                 productGrid.innerHTML = `<p class="text-center col-span-full">No products found in this category.</p>`;
+                 return;
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = `
+                    <div class="product-card bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col" data-id="${product.id}">
+                        <div class="relative">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover cursor-pointer product-image">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2 product-name cursor-pointer">${product.name}</h3>
+                            <p class="text-xl font-extrabold text-sky-500 mb-4 mt-auto">$${product.price.toFixed(2)}</p>
+                            <button class="add-to-cart-btn w-full bg-amber-400 text-gray-900 font-semibold py-2 rounded-lg hover:bg-amber-500 transition duration-300" data-id="${product.id}">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+        }
+        
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let subtotal = 0;
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Your cart is empty.</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                cart.forEach(item => {
+                    const cartItemHTML = `
+                        <div class="flex items-center justify-between mb-4" data-id="${item.id}">
+                            <div class="flex items-center">
+                                <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                                <div>
+                                    <p class="font-bold">${item.name}</p>
+                                    <p class="text-sm text-gray-500">Quantity: ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <p class="font-bold mr-4">$${(item.price * item.quantity).toFixed(2)}</p>
+                                <button class="remove-from-cart-btn text-red-500 hover:text-red-700 p-1" data-id="${item.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.innerHTML += cartItemHTML;
+                    subtotal += item.price * item.quantity;
+                });
+                checkoutBtn.disabled = false;
+            }
+            cartCount.textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const cartItem = cart.find(item => item.id === productId);
+
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCart();
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            const detailHTML = `
+                <button id="close-detail-btn" class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200 z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-auto object-cover rounded-lg shadow-lg">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-gray-900 mb-2">${product.name}</h2>
+                        <p class="text-3xl font-bold text-sky-500 mb-4">$${product.price.toFixed(2)}</p>
+                        <p class="text-gray-600 mb-6">${product.description}</p>
+                        <button class="add-to-cart-btn w-full bg-amber-400 text-gray-900 font-semibold py-3 rounded-lg hover:bg-amber-500 transition duration-300" data-id="${product.id}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            productDetailContent.innerHTML = detailHTML;
+            productDetailModal.classList.remove('hidden');
+        }
+
+        // --- EVENT LISTENERS ---
+        // Auth Listeners
+        loginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+        registerBtn.addEventListener('click', () => registerModal.classList.remove('hidden'));
+        logoutBtn.addEventListener('click', handleLogout);
+        closeLoginModalBtn.addEventListener('click', () => loginModal.classList.add('hidden'));
+        closeRegisterModalBtn.addEventListener('click', () => registerModal.classList.add('hidden'));
+        loginForm.addEventListener('submit', handleLogin);
+        registerForm.addEventListener('submit', handleRegister);
+
+        productGrid.addEventListener('click', e => {
+            if (e.target.classList.contains('add-to-cart-btn')) {
+                const productId = parseInt(e.target.dataset.id);
+                addToCart(productId);
+            }
+             if (e.target.classList.contains('product-image') || e.target.classList.contains('product-name')) {
+                const productId = parseInt(e.target.closest('.product-card').dataset.id);
+                showProductDetail(productId);
+            }
+        });
+
+        cartButton.addEventListener('click', () => cartModal.classList.remove('hidden'));
+        closeCartBtn.addEventListener('click', () => cartModal.classList.add('hidden'));
+        cartModal.addEventListener('click', e => {
+            if (e.target === cartModal) cartModal.classList.add('hidden');
+        });
+
+        cartItemsContainer.addEventListener('click', e => {
+            if (e.target.closest('.remove-from-cart-btn')) {
+                const productId = parseInt(e.target.closest('.remove-from-cart-btn').dataset.id);
+                removeFromCart(productId);
+            }
+        });
+
+        checkoutBtn.addEventListener('click', () => {
+             if (!currentUser) {
+                showNotification("Please log in to proceed to checkout.");
+                return;
+            }
+            if(cart.length > 0) {
+                cartModal.classList.add('hidden');
+                checkoutFormModal.classList.remove('hidden');
+            }
+        });
+
+        paymentForm.addEventListener('submit', e => {
+            e.preventDefault();
+            // In a real app, you would process payment here.
+            // For this simulation, we'll just confirm the order.
+            paymentForm.reset();
+            cart = [];
+            updateCart();
+            checkoutFormModal.classList.add('hidden');
+            confirmationModal.classList.remove('hidden');
+        });
+        
+        closeCheckoutFormBtn.addEventListener('click', () => checkoutFormModal.classList.add('hidden'));
+        checkoutFormModal.addEventListener('click', e => {
+             if (e.target === checkoutFormModal) {
+                checkoutFormModal.classList.add('hidden');
+            }
+        });
+        
+        productDetailModal.addEventListener('click', e => {
+            if (e.target.closest('#close-detail-btn') || e.target === productDetailModal) {
+                 productDetailModal.classList.add('hidden');
+            }
+            if(e.target.classList.contains('add-to-cart-btn')) {
+                const productId = parseInt(e.target.dataset.id);
+                addToCart(productId);
+                productDetailModal.classList.add('hidden');
+            }
+        });
+        
+        closeConfirmationBtn.addEventListener('click', () => confirmationModal.classList.add('hidden'));
+
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-sky-500', 'text-white');
+                    b.classList.add('bg-white', 'text-gray-600');
+                });
+                btn.classList.add('active', 'bg-sky-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-gray-600');
+                renderProducts(btn.dataset.filter);
+            });
+        });
+
+
+        // --- INITIAL RENDER ---
+        renderProducts();
+        updateCart();
+        updateAuthStateUI();
+    });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
